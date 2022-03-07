@@ -66,13 +66,16 @@ def get_pie_chart(entered_site):
                 [Input(component_id='site-dropdown',component_property='value'),
                 Input(component_id='payload-slider',component_property='value')])
 def scatter(entered_site,payload):
+  
     filtered_df = spacex_df[spacex_df['Payload Mass (kg)'].between(payload[0],payload[1])]
     
     if entered_site=='ALL':
-        fig=px.scatter(filtered_df,x='Payload Mass (kg)',y='class',color='Booster Version Category',title='Success count on Payload mass for all sites')
+        fig=px.scatter(filtered_df,x='Payload Mass (kg)',y='class',color='Booster Version Category',
+                       title='Successes of Payload mass for all sites')
         return fig
     else:
-        fig=px.scatter(filtered_df[filtered_df['Launch Site']==entered_site],x='Payload Mass (kg)',y='class',color='Booster Version Category',title=f"Success count on Payload mass for site {entered_site}")
+        fig=px.scatter(filtered_df[filtered_df['Launch Site']==entered_site],x='Payload Mass (kg)',y='class',color='Booster Version Category',
+                       title=f"Successes of Payload mass for site" + entered_site)
         return fig
 
 # Run the app
